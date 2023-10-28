@@ -47,6 +47,10 @@ public class scrimmageTest extends OpMode {
         //hand servos
         leftFinger = hardwareMap.servo.get("leftFinger");
         rightFinger = hardwareMap.servo.get("rightFinger");
+
+        //resets hand servos
+        //leftFinger.setPosition(0.75);
+        //rightFinger.setPosition(0);
     }
 
     @Override
@@ -70,29 +74,30 @@ public class scrimmageTest extends OpMode {
         frontRightMotor.setPower(frontRightPower);
         backRightMotor.setPower(backRightPower);
 
-        double leftStickPower = gamepad1.right_stick_y;
+        double rightStickY = gamepad1.right_stick_y;
         double rightStickPower = -gamepad1.right_stick_y;
-        if (motor1.getCurrentPosition() >= motor1Bottom && motor1.getCurrentPosition() <= motor1Top) {
-            motor1.setPower(leftStickPower);
-            motor2.setPower(rightStickPower);
-        } else {
-            if (motor1.getCurrentPosition() > motor1Top) {
-                motor1.setPower(-0.5);
-                motor1.setPower(0.5);
-            }
-            if (motor1.getCurrentPosition() < motor1Bottom) {
-                motor1.setPower(0.5);
-                motor1.setPower(-0.5);
-            }
-        }
+//        if (motor1.getCurrentPosition() >= motor1Bottom && motor1.getCurrentPosition() <= motor1Top) {
+//            motor1.setPower(leftStickPower);
+//            motor2.setPower(rightStickPower);
+//        } else {
+//            if (motor1.getCurrentPosition() > motor1Top) {
+//                motor1.setPower(-0.5);
+//                motor1.setPower(0.5);
+//            }
+//            if (motor1.getCurrentPosition() < motor1Bottom) {
+//                motor1.setPower(0.5);
+//                motor1.setPower(-0.5);
+//            }
+//        }
+        motor1.setPower(rightStickY);
+        motor2.setPower(rightStickPower);
+
         //arm servo control
-        if (gamepad1.left_trigger > 0.05) {
-            armServo.setPosition(gamepad1.left_trigger);
-        }
+        armServo.setPosition(gamepad1.left_trigger/2);
+
         //hand control
-        if (gamepad1.right_trigger > 0.05) {
-            leftFinger.setPosition(gamepad1.right_trigger - 0.25);
-            rightFinger.setPosition(gamepad1.right_trigger + 0.25);
-        }
+        leftFinger.setPosition(gamepad1.right_trigger);
+        rightFinger.setPosition(gamepad1.right_trigger);
+
     }
 }
