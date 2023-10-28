@@ -6,17 +6,26 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
 
 public class scrimmageTest extends OpMode {
 
+    //movement motors
     private DcMotor frontLeftMotor;
     private DcMotor backLeftMotor;
     private DcMotor frontRightMotor;
     private DcMotor backRightMotor;
+    //arm motors
     private DcMotor motor1;
     private DcMotor motor2;
+    //arm servo
+    private Servo armServo;
+    //hand servos
+    private Servo leftFinger;
+    private Servo rightFinger;
+    //limiter values
     private final int motor1Top = -75;
     private final int motor1Bottom = 82;
     private final int motor2Top = 144;
@@ -25,12 +34,19 @@ public class scrimmageTest extends OpMode {
 
     @Override
     public void init() {
+        //movement motors
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
         frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+        //arm motors
         motor1 = hardwareMap.dcMotor.get("motor1");
         motor2 = hardwareMap.dcMotor.get("motor2");
+        //arm servo
+        armServo = hardwareMap.servo.get("armServo");
+        //hand servos
+        leftFinger = hardwareMap.servo.get("leftFinger");
+        rightFinger = hardwareMap.servo.get("rightFinger");
     }
 
     @Override
@@ -69,6 +85,14 @@ public class scrimmageTest extends OpMode {
                 motor1.setPower(-0.5);
             }
         }
-
+        //arm servo control
+        if (gamepad1.left_trigger > 0.05) {
+            armServo.setPosition(gamepad1.left_trigger);
+        }
+        //hand control
+        if (gamepad1.right_trigger > 0.05) {
+            leftFinger.setPosition(gamepad1.right_trigger - 0.25);
+            rightFinger.setPosition(gamepad1.right_trigger + 0.25);
+        }
     }
 }
