@@ -45,8 +45,8 @@ public class scrimmageTest extends OpMode {
         //arm servo
         armServo = hardwareMap.servo.get("armServo");
         //hand servos
-        leftFinger = hardwareMap.servo.get("leftFinger");
-        rightFinger = hardwareMap.servo.get("rightFinger");
+//        leftFinger = hardwareMap.servo.get("leftFinger");
+//        rightFinger = hardwareMap.servo.get("rightFinger");
 
         //resets hand servos
         //leftFinger.setPosition(0.75);
@@ -89,15 +89,15 @@ public class scrimmageTest extends OpMode {
 //                motor1.setPower(-0.5);
 //            }
 //        }
-        motor1.setPower(rightStickY);
-        motor2.setPower(rightStickPower);
+        motor1.setPower(rightStickY*0.25);
+        motor2.setPower(rightStickPower*0.25);
 
         //arm servo control
-        armServo.setPosition(gamepad1.left_trigger/2);
-
-        //hand control
-        leftFinger.setPosition(gamepad1.right_trigger);
-        rightFinger.setPosition(gamepad1.right_trigger);
+//        armServo.setPosition(gamepad1.left_trigger/2);
+//
+//        //hand control
+//        leftFinger.setPosition(gamepad1.right_trigger);
+//        rightFinger.setPosition(gamepad1.right_trigger);
 
     }
 }
