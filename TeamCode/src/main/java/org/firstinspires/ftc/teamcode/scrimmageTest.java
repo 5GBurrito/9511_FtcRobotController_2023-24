@@ -75,7 +75,7 @@ public class scrimmageTest extends OpMode {
         backRightMotor.setPower(backRightPower);
 
         double rightStickY = gamepad1.right_stick_y;
-        double rightStickPower = -gamepad1.right_stick_y;
+        double negativeRightStickY = -gamepad1.right_stick_y;
 //        if (motor1.getCurrentPosition() >= motor1Bottom && motor1.getCurrentPosition() <= motor1Top) {
 //            motor1.setPower(leftStickPower);
 //            motor2.setPower(rightStickPower);
@@ -90,14 +90,14 @@ public class scrimmageTest extends OpMode {
 //            }
 //        }
         motor1.setPower(rightStickY*0.25);
-        motor2.setPower(rightStickPower*0.25);
+        motor2.setPower(negativeRightStickY*0.25);
 
         //arm servo control
-//        armServo.setPosition(gamepad1.left_trigger/2);
-//
-//        //hand control
-//        leftFinger.setPosition(gamepad1.right_trigger);
-//        rightFinger.setPosition(gamepad1.right_trigger);
+        armServo.setPosition(gamepad1.left_trigger/2);
+
+        //hand control
+        leftFinger.setPosition(gamepad1.right_trigger);
+        rightFinger.setPosition(gamepad1.right_trigger);
 
     }
 }
