@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
-public class meetOneCode extends OpMode {
+public class meetThreePushbotCode extends OpMode {
 
     //mecanum motors
     private DcMotor frontLeftMotor;
@@ -24,6 +24,9 @@ public class meetOneCode extends OpMode {
     //launcher servo
     private Servo launcherServo;
 
+    //elbow servo
+    private DcMotor elbowMotor;
+
     @Override
     public void init() {
 
@@ -33,17 +36,20 @@ public class meetOneCode extends OpMode {
         backLeftMotor = hardwareMap.dcMotor.get("backLeft");
         backRightMotor = hardwareMap.dcMotor.get("backRight");
 
-        //arm motors
-        armMotor = hardwareMap.dcMotor.get("armMotor");
+//        //arm motors
+//        armMotor = hardwareMap.dcMotor.get("armMotor");
 
         //hand servo
-        leftFinger = hardwareMap.servo.get("leftFinger");
-        rightFinger = hardwareMap.servo.get("rightFinger");
+//        leftFinger = hardwareMap.servo.get("leftFinger");
+//        rightFinger = hardwareMap.servo.get("rightFinger");
 
         //launcher servo
         launcherServo = hardwareMap.servo.get("launcherServo");
-        launcherServo.setPosition(0);
-        //launcherServo.setPosition(1);
+        //launcherServo.setPosition(0);
+        launcherServo.setPosition(0.75);
+
+//        //elbow motor
+//        elbowMotor = hardwareMap.dcMotor.get("elbowMotor");
     }
 
     @Override
@@ -63,22 +69,25 @@ public class meetOneCode extends OpMode {
         double frontRightPower = (y - x - rx) / denominator;
         double backRightPower = (y + x - rx) / denominator;
 
-        frontLeftMotor.setPower(frontLeftPower);
-        backLeftMotor.setPower(backLeftPower);
+        frontLeftMotor.setPower(-frontLeftPower);
+        backLeftMotor.setPower(-backLeftPower);
         frontRightMotor.setPower(frontRightPower);
         backRightMotor.setPower(backRightPower);
 
         //arm motor
-        armMotor.setPower(gamepad1.right_stick_y);
+//        armMotor.setPower(-gamepad1.right_stick_y);
 
         //hand servo
-        leftFinger.setPosition(gamepad1.left_trigger*0.75);
-        rightFinger.setPosition(-gamepad1.left_trigger*0.75);
+//        leftFinger.setPosition(-gamepad1.right_trigger*0.75);
+//        rightFinger.setPosition(gamepad1.right_trigger*0.75);
 
         //launcher
-        if (gamepad1.dpad_up) {
-            launcherServo.setPosition(1);
-            //launcherServo.setPosition(0);
+        if (gamepad1.a) {
+            //launcherServo.setPosition(0.75);
+            launcherServo.setPosition(0);
         }
+
+//        //elbow
+//        elbowMotor.setPower(gamepad1.touchpad_finger_1_y);
     }
 }

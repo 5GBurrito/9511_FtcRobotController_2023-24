@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode; // Replace with your package name
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "Encoder Reset Example", group = "Example")
+@TeleOp
+@Disabled
 public class encoderReseterForArms extends LinearOpMode {
 
     private DcMotorEx motor1;
