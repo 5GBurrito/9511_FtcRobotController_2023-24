@@ -34,10 +34,10 @@ public class autoTemplate extends OpMode {
 
     //stop moving function
     private void stopMoving() {
-        frontLeftMotor.setPower(1);
-        frontRightMotor.setPower(1);
-        backLeftMotor.setPower(1);
-        backRightMotor.setPower(1);
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        backRightMotor.setPower(0);
     }
 
     //move forward function
