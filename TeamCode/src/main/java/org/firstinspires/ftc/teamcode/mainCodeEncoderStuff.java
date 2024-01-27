@@ -1,12 +1,15 @@
 package org.firstinspires.ftc.teamcode;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
-public class mainCode extends OpMode {
+public class mainCodeEncoderStuff extends OpMode {
 
     //mecanum motors
     private DcMotor frontLeftMotor;
@@ -26,6 +29,9 @@ public class mainCode extends OpMode {
     //hand servo
     private Servo handServo;
 
+    private int slideZero;
+    private int slidePosition;
+
     @Override
     public void init() {
 
@@ -37,17 +43,29 @@ public class mainCode extends OpMode {
 
         //launcher servo
         launcherServo = hardwareMap.servo.get("launcherServo");
-        //launcherServo.setPosition(0);
-        launcherServo.setPosition(0.75);
+        launcherServo.setPosition(0);
+        //launcherServo.setPosition(0.75);
 
         //linear slide servo
         slideMotor = hardwareMap.dcMotor.get("slideMotor");
+        slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slideZero = slideMotor.getCurrentPosition();
+        slideMotor.setTargetPosition(slideMotor.getCurrentPosition());
+        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //wrist servo
         wristServo = hardwareMap.servo.get("wristServo");
+        wristServo.setPosition(0);
 
         //hand servo
         handServo = hardwareMap.servo.get("handServo");
+        handServo.setPosition(1);
+
+        //slide stuff
+        slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slideZero = slideMotor.getCurrentPosition();
+        slideMotor.setTargetPosition(slideMotor.getCurrentPosition());
+        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     @Override
@@ -71,5 +89,28 @@ public class mainCode extends OpMode {
         backLeftMotor.setPower(-backLeftPower);
         frontRightMotor.setPower(frontRightPower);
         backRightMotor.setPower(backRightPower);
+
+        //wrist and hand control
+        wristServo.setPosition(gamepad1.left_trigger);
+        handServo.setPosition(1-gamepad1.right_trigger);
+
+        //arm control
+        if (gamepad1.cross) {
+            slidePosition = slideZero;
+        }
+        if (gamepad1.square) {
+            slidePosition = slideZero + 50;
+        }
+        if (gamepad1.triangle) {
+            slidePosition = slideZero + 100;
+        }
+
+        slideMotor.setTargetPosition(slidePosition);
+        slideMotor.setPower(max(0.2, abs(slidePosition - slideMotor.getCurrentPosition()) / 500.0));
+
+        //launcher code
+        if (gamepad1.circle) {
+            launcherServo.setPosition(1);
+        }
     }
 }
