@@ -43,7 +43,7 @@ public class mainCodeEncoderStuff extends OpMode {
 
         //launcher servo
         launcherServo = hardwareMap.servo.get("launcherServo");
-        launcherServo.setPosition(0);
+        launcherServo.setPosition(0.15);
         //launcherServo.setPosition(0.75);
 
         //linear slide servo
@@ -91,18 +91,18 @@ public class mainCodeEncoderStuff extends OpMode {
         backRightMotor.setPower(backRightPower);
 
         //wrist and hand control
-        wristServo.setPosition(gamepad1.left_trigger);
-        handServo.setPosition(1-gamepad1.right_trigger);
+        wristServo.setPosition(gamepad1.left_trigger*0.60);
+        handServo.setPosition(1-gamepad1.right_trigger) ;
 
         //arm control
         if (gamepad1.cross) {
             slidePosition = slideZero;
         }
         if (gamepad1.square) {
-            slidePosition = slideZero + 50;
+            slidePosition = slideZero + 500;
         }
         if (gamepad1.triangle) {
-            slidePosition = slideZero + 100;
+            slidePosition = slideZero + 1000;
         }
 
         slideMotor.setTargetPosition(slidePosition);

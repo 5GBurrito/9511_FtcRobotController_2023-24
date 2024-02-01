@@ -1,7 +1,7 @@
 //motor 1, top: -75, bottom: 82
 //motor 2, top: 144, bottom: 105
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.old;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
