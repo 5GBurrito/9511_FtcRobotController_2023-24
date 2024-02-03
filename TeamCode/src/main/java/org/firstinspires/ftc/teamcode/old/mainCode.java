@@ -1,7 +1,4 @@
-package org.firstinspires.ftc.teamcode;
-
-import static java.lang.Math.abs;
-import static java.lang.Math.max;
+package org.firstinspires.ftc.teamcode.old;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -9,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
-public class mainCodeEncoderStuff extends OpMode {
+public class mainCode extends OpMode {
 
     //mecanum motors
     private DcMotor frontLeftMotor;
@@ -29,9 +26,6 @@ public class mainCodeEncoderStuff extends OpMode {
     //hand servo
     private Servo handServo;
 
-    private int slideZero;
-    private int slidePosition;
-
     @Override
     public void init() {
 
@@ -43,29 +37,17 @@ public class mainCodeEncoderStuff extends OpMode {
 
         //launcher servo
         launcherServo = hardwareMap.servo.get("launcherServo");
-        launcherServo.setPosition(0.15);
-        //launcherServo.setPosition(0.75);
+        //launcherServo.setPosition(0);
+        launcherServo.setPosition(0.75);
 
         //linear slide servo
         slideMotor = hardwareMap.dcMotor.get("slideMotor");
-        slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slideZero = slideMotor.getCurrentPosition();
-        slideMotor.setTargetPosition(slideMotor.getCurrentPosition());
-        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //wrist servo
         wristServo = hardwareMap.servo.get("wristServo");
-        wristServo.setPosition(0);
 
         //hand servo
         handServo = hardwareMap.servo.get("handServo");
-        handServo.setPosition(1);
-
-        //slide stuff
-        slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slideZero = slideMotor.getCurrentPosition();
-        slideMotor.setTargetPosition(slideMotor.getCurrentPosition());
-        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     @Override
@@ -89,28 +71,5 @@ public class mainCodeEncoderStuff extends OpMode {
         backLeftMotor.setPower(-backLeftPower);
         frontRightMotor.setPower(frontRightPower);
         backRightMotor.setPower(backRightPower);
-
-        //wrist and hand control
-        wristServo.setPosition(gamepad1.left_trigger*0.60);
-        handServo.setPosition(1-gamepad1.right_trigger) ;
-
-        //arm control
-        if (gamepad1.cross) {
-            slidePosition = slideZero;
-        }
-        if (gamepad1.square) {
-            slidePosition = slideZero + 500;
-        }
-        if (gamepad1.triangle) {
-            slidePosition = slideZero + 1000;
-        }
-
-        slideMotor.setTargetPosition(slidePosition);
-        slideMotor.setPower(max(0.2, abs(slidePosition - slideMotor.getCurrentPosition()) / 500.0));
-
-        //launcher code
-        if (gamepad1.circle) {
-            launcherServo.setPosition(1);
-        }
     }
 }
