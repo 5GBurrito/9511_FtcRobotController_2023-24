@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.old;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+@Disabled
 @TeleOp
-public class mainCode extends OpMode {
+public class oldMainCode extends OpMode {
 
     //mecanum motors
     private DcMotor frontLeftMotor;

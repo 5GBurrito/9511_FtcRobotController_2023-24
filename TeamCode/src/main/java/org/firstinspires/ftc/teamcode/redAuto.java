@@ -41,8 +41,8 @@ public class redAuto extends OpMode {
 
     //move forward function
     public void moveForward(int length) {
-        frontLeftMotor.setPower(1);
-        frontRightMotor.setPower(1);
+        frontLeftMotor.setPower(-1);
+        frontRightMotor.setPower(-1);
         backLeftMotor.setPower(1);
         backRightMotor.setPower(1);
         sleepForMilliseconds(length);
@@ -54,8 +54,8 @@ public class redAuto extends OpMode {
 
     //move backwards function
     public void moveBackwards(int length) {
-        frontLeftMotor.setPower(-1);
-        frontRightMotor.setPower(-1);
+        frontLeftMotor.setPower(1);
+        frontRightMotor.setPower(1);
         backLeftMotor.setPower(-1);
         backRightMotor.setPower(-1);
         sleepForMilliseconds(length);
@@ -67,8 +67,8 @@ public class redAuto extends OpMode {
 
     //turn left function
     public void turnLeft(int length) {
-        frontLeftMotor.setPower(-1);
-        frontRightMotor.setPower(1);
+        frontLeftMotor.setPower(1);
+        frontRightMotor.setPower(-1);
         backLeftMotor.setPower(-1);
         backRightMotor.setPower(1);
         sleepForMilliseconds(length);
@@ -80,19 +80,6 @@ public class redAuto extends OpMode {
 
     //turn right function
     public void turnRight(int length) {
-        frontLeftMotor.setPower(1);
-        frontRightMotor.setPower(-1);
-        backLeftMotor.setPower(1);
-        backRightMotor.setPower(-1);
-        sleepForMilliseconds(length);
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        backRightMotor.setPower(0);
-    }
-
-    //strafe left function
-    public void strafeLeft(int length) {
         frontLeftMotor.setPower(-1);
         frontRightMotor.setPower(1);
         backLeftMotor.setPower(1);
@@ -104,10 +91,23 @@ public class redAuto extends OpMode {
         backRightMotor.setPower(0);
     }
 
-    //strafe right function
-    public void strafeRight(int length) {
+    //strafe left function
+    public void strafeLeft(int length) {
         frontLeftMotor.setPower(1);
         frontRightMotor.setPower(-1);
+        backLeftMotor.setPower(1);
+        backRightMotor.setPower(-1);
+        sleepForMilliseconds(length);
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        backRightMotor.setPower(0);
+    }
+
+    //strafe right function
+    public void strafeRight(int length) {
+        frontLeftMotor.setPower(-1);
+        frontRightMotor.setPower(1);
         backLeftMotor.setPower(-1);
         backRightMotor.setPower(1);
         sleepForMilliseconds(length);
@@ -135,7 +135,7 @@ public class redAuto extends OpMode {
 
     @Override
     public void loop() {
-        strafeRight(500);
-        stop();
+        strafeRight(250);
+        requestOpModeStop();
     }
 }

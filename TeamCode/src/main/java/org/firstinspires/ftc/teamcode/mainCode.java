@@ -91,8 +91,9 @@ public class mainCode extends OpMode {
         backRightMotor.setPower(backRightPower);
 
         //wrist and hand control
-        wristServo.setPosition(gamepad1.left_trigger*0.45);
-        handServo.setPosition(1-gamepad1.right_trigger*0.75) ;
+        //wristServo.setPosition(gamepad1.left_trigger*0.45);
+        wristServo.setPosition((gamepad1.left_trigger*0.70));
+        handServo.setPosition(gamepad1.right_trigger*0.80) ;
 
         //arm control
         if (gamepad1.cross) {
@@ -103,6 +104,9 @@ public class mainCode extends OpMode {
         }
         if (gamepad1.triangle) {
             slidePosition = slideZero + 1000;
+        }
+        if (gamepad1.left_bumper) {
+            slidePosition = slideZero + 250;
         }
 
         slideMotor.setTargetPosition(slidePosition);

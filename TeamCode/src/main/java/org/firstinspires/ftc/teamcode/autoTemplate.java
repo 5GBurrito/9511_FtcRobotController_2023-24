@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
 import static java.lang.Thread.sleep;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -31,6 +33,18 @@ public class autoTemplate extends OpMode {
 
     //launcher servo
     private Servo launcherServo;
+
+    //linear slide motor
+    private DcMotor slideMotor;
+
+    //wrist servo
+    private Servo wristServo;
+
+    //hand servo
+    private Servo handServo;
+
+    private int slideZero;
+    private int slidePosition;
 
     //stop moving function
     private void stopMoving() {
@@ -118,6 +132,27 @@ public class autoTemplate extends OpMode {
         backRightMotor.setPower(0);
     }
 
+    private void uppies() {
+        slidePosition = slideZero + 250;
+        slideMotor.setTargetPosition(slidePosition);
+        slideMotor.setPower(max(0.2, abs(slidePosition - slideMotor.getCurrentPosition()) / 500.0));
+    }
+
+    private void returnToTheDeppestPitOfHell() {
+        slidePosition = slideZero;
+        slideMotor.setTargetPosition(slidePosition);
+        slideMotor.setPower(max(0.2, abs(slidePosition - slideMotor.getCurrentPosition()) / 500.0));
+    }
+
+    public void DROPDROPDROPDROPDROP() {
+        handServo.setPosition(0);
+    }
+
+    public void KYSNOW() {
+        returnToTheDeppestPitOfHell();
+        requestOpModeStop();
+    }
+
     @Override
     public void init() {
 
@@ -132,11 +167,26 @@ public class autoTemplate extends OpMode {
         //launcherServo.setPosition(0);
         launcherServo.setPosition(0.75);
 
+        //linear slide servo
+        slideMotor = hardwareMap.dcMotor.get("slideMotor");
+        slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slideZero = slideMotor.getCurrentPosition();
+        slideMotor.setTargetPosition(slideMotor.getCurrentPosition());
+        slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        //wrist servo
+        wristServo = hardwareMap.servo.get("wristServo");
+        wristServo.setPosition(0);
+
+        //hand servo
+        handServo = hardwareMap.servo.get("handServo");
+        handServo.setPosition(1);
+
     }
 
     @Override
     public void loop() {
 
-        stop();
+        KYSNOW();
     }
 }
