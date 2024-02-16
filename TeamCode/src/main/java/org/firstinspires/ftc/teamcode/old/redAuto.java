@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.old;
 
 import static java.lang.Thread.sleep;
 
@@ -9,8 +9,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous
+@Disabled
 
-public class blueAuto extends OpMode {
+public class redAuto extends OpMode {
 
     //adds a working sleep function with the format on rest(time);
     public void sleepForMilliseconds(int milliseconds) {
@@ -117,7 +118,6 @@ public class blueAuto extends OpMode {
         backRightMotor.setPower(0);
     }
 
-
     @Override
     public void init() {
 
@@ -136,7 +136,7 @@ public class blueAuto extends OpMode {
 
     @Override
     public void loop() {
-        strafeLeft(250);
+        strafeRight(250);
         requestOpModeStop();
     }
 }

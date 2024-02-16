@@ -5,15 +5,15 @@ import static java.lang.Math.max;
 import static java.lang.Thread.sleep;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous
-@Disabled
 
-public class autoTemplate extends OpMode {
+//parking to right
+
+public class redBackAuto extends OpMode {
 
     //adds a working sleep function with the format on rest(time);
     public void sleepForMilliseconds(int milliseconds) {
@@ -186,7 +186,10 @@ public class autoTemplate extends OpMode {
 
     @Override
     public void loop() {
-
+        moveForward(300);
+        DROPDROPDROPDROPDROP();
+        moveBackwards(300);
+        strafeRight(300);
         KYSNOW();
     }
 }
