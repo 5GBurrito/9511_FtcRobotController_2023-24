@@ -11,7 +11,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous
-@Disabled
 
 public class autoTemplate extends OpMode {
 
@@ -56,9 +55,9 @@ public class autoTemplate extends OpMode {
 
     //move forward function
     public void moveForward(int length) {
-        frontLeftMotor.setPower(1);
+        frontLeftMotor.setPower(-1);
         frontRightMotor.setPower(1);
-        backLeftMotor.setPower(1);
+        backLeftMotor.setPower(-1);
         backRightMotor.setPower(1);
         sleepForMilliseconds(length);
         frontLeftMotor.setPower(0);
@@ -69,9 +68,9 @@ public class autoTemplate extends OpMode {
 
     //move backwards function
     public void moveBackwards(int length) {
-        frontLeftMotor.setPower(-1);
+        frontLeftMotor.setPower(1);
         frontRightMotor.setPower(-1);
-        backLeftMotor.setPower(-1);
+        backLeftMotor.setPower(1);
         backRightMotor.setPower(-1);
         sleepForMilliseconds(length);
         frontLeftMotor.setPower(0);
@@ -82,9 +81,9 @@ public class autoTemplate extends OpMode {
 
     //turn left function
     public void turnLeft(int length) {
-        frontLeftMotor.setPower(-1);
+        frontLeftMotor.setPower(1);
         frontRightMotor.setPower(1);
-        backLeftMotor.setPower(-1);
+        backLeftMotor.setPower(1);
         backRightMotor.setPower(1);
         sleepForMilliseconds(length);
         frontLeftMotor.setPower(0);
@@ -95,9 +94,9 @@ public class autoTemplate extends OpMode {
 
     //turn right function
     public void turnRight(int length) {
-        frontLeftMotor.setPower(1);
+        frontLeftMotor.setPower(-1);
         frontRightMotor.setPower(-1);
-        backLeftMotor.setPower(1);
+        backLeftMotor.setPower(-1);
         backRightMotor.setPower(-1);
         sleepForMilliseconds(length);
         frontLeftMotor.setPower(0);
@@ -108,9 +107,9 @@ public class autoTemplate extends OpMode {
 
     //strafe left function
     public void strafeLeft(int length) {
-        frontLeftMotor.setPower(-1);
+        frontLeftMotor.setPower(1);
         frontRightMotor.setPower(1);
-        backLeftMotor.setPower(1);
+        backLeftMotor.setPower(-1);
         backRightMotor.setPower(-1);
         sleepForMilliseconds(length);
         frontLeftMotor.setPower(0);
@@ -121,9 +120,9 @@ public class autoTemplate extends OpMode {
 
     //strafe right function
     public void strafeRight(int length) {
-        frontLeftMotor.setPower(1);
+        frontLeftMotor.setPower(-1);
         frontRightMotor.setPower(-1);
-        backLeftMotor.setPower(-1);
+        backLeftMotor.setPower(1);
         backRightMotor.setPower(1);
         sleepForMilliseconds(length);
         frontLeftMotor.setPower(0);
@@ -186,7 +185,12 @@ public class autoTemplate extends OpMode {
 
     @Override
     public void loop() {
-
+        moveForward(3000);
+        moveBackwards(3000);
+        strafeLeft(3000);
+        strafeRight(3000);
+        turnLeft(3000);
+        turnRight(3000);
         KYSNOW();
     }
 }

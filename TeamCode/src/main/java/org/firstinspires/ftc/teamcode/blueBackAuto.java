@@ -57,84 +57,66 @@ public class blueBackAuto extends OpMode {
 
     //move forward function
     public void moveForward(int length) {
-        frontLeftMotor.setPower(1);
-        frontRightMotor.setPower(1);
-        backLeftMotor.setPower(1);
-        backRightMotor.setPower(1);
+        frontLeftMotor.setPower(-0.5);
+        frontRightMotor.setPower(0.5);
+        backLeftMotor.setPower(-0.5);
+        backRightMotor.setPower(0.5);
         sleepForMilliseconds(length);
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        backRightMotor.setPower(0);
+        stopMoving();
     }
 
     //move backwards function
     public void moveBackwards(int length) {
-        frontLeftMotor.setPower(-1);
-        frontRightMotor.setPower(-1);
-        backLeftMotor.setPower(-1);
-        backRightMotor.setPower(-1);
+        frontLeftMotor.setPower(0.5);
+        frontRightMotor.setPower(-0.5);
+        backLeftMotor.setPower(0.5);
+        backRightMotor.setPower(-0.5);
         sleepForMilliseconds(length);
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        backRightMotor.setPower(0);
+        stopMoving();
     }
 
     //turn left function
     public void turnLeft(int length) {
-        frontLeftMotor.setPower(-1);
-        frontRightMotor.setPower(1);
-        backLeftMotor.setPower(-1);
-        backRightMotor.setPower(1);
+        frontLeftMotor.setPower(0.5);
+        frontRightMotor.setPower(0.5);
+        backLeftMotor.setPower(0.5);
+        backRightMotor.setPower(0.5);
         sleepForMilliseconds(length);
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        backRightMotor.setPower(0);
+        stopMoving();
     }
 
     //turn right function
     public void turnRight(int length) {
-        frontLeftMotor.setPower(1);
-        frontRightMotor.setPower(-1);
-        backLeftMotor.setPower(1);
-        backRightMotor.setPower(-1);
+        frontLeftMotor.setPower(-0.5);
+        frontRightMotor.setPower(-0.5);
+        backLeftMotor.setPower(-0.5);
+        backRightMotor.setPower(-0.5);
         sleepForMilliseconds(length);
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        backRightMotor.setPower(0);
+        stopMoving();
     }
 
     //strafe left function
     public void strafeLeft(int length) {
-        frontLeftMotor.setPower(-1);
-        frontRightMotor.setPower(1);
-        backLeftMotor.setPower(1);
-        backRightMotor.setPower(-1);
+        frontLeftMotor.setPower(0.5);
+        frontRightMotor.setPower(0.5);
+        backLeftMotor.setPower(-0.5);
+        backRightMotor.setPower(-0.5);
         sleepForMilliseconds(length);
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        backRightMotor.setPower(0);
+        stopMoving();
     }
 
     //strafe right function
     public void strafeRight(int length) {
-        frontLeftMotor.setPower(1);
-        frontRightMotor.setPower(-1);
-        backLeftMotor.setPower(-1);
-        backRightMotor.setPower(1);
+        frontLeftMotor.setPower(-0.5);
+        frontRightMotor.setPower(-0.5);
+        backLeftMotor.setPower(0.5);
+        backRightMotor.setPower(0.5);
         sleepForMilliseconds(length);
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        backRightMotor.setPower(0);
+        stopMoving();
     }
 
     private void linearSlideUp() {
-        slidePosition = slideZero + 250;
+        slidePosition = slideZero + 275;
         slideMotor.setTargetPosition(slidePosition);
         slideMotor.setPower(max(0.2, abs(slidePosition - slideMotor.getCurrentPosition()) / 500.0));
     }
@@ -148,11 +130,19 @@ public class blueBackAuto extends OpMode {
     public void DROPDROPDROPDROPDROP() {
         handServo.setPosition(0);
     }
-
+    public void handSequence() {
+        wristServo.setPosition(0.7);
+        linearSlideUp();
+        DROPDROPDROPDROPDROP();
+        wristServo.setPosition(0);
+        handServo.setPosition(1);
+    }
     public void KYSNOW() {
         returnToTheDeepestPitOfHell();
         requestOpModeStop();
     }
+
+
 
     @Override
     public void init() {
@@ -187,10 +177,16 @@ public class blueBackAuto extends OpMode {
 
     @Override
     public void loop() {
-        moveForward(300);
-        DROPDROPDROPDROPDROP();
-        moveBackwards(300);
-        strafeLeft(300);
+        moveForward(800);
+        handSequence();
+        moveBackwards(780);
+        strafeLeft(800);
         KYSNOW();
     }
+    //tf2
+    //warfork
+    //fps chess
+    //jesus christ rpg trilogy
+    //starship theory
+    //lethal company
 }

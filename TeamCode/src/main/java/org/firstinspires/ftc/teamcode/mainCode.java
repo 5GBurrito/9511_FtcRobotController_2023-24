@@ -106,7 +106,7 @@ public class mainCode extends OpMode {
             slidePosition = slideZero + 1000;
         }
         if (gamepad1.left_bumper) {
-            slidePosition = slideZero + 250;
+            slidePosition = slideZero + 275;
         }
 
         slideMotor.setTargetPosition(slidePosition);
